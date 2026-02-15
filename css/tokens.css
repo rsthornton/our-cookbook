@@ -1,0 +1,45 @@
+/*
+ * Design Tokens — Our Cookbook
+ * ============================
+ * These CSS variables (custom properties) control the entire look of the site.
+ * Change a color here and it updates EVERYWHERE.
+ *
+ * TRY IT: Change --color-terracotta to your favorite color and watch the whole site shift!
+ */
+
+:root {
+  /* ── Core palette (preserved from original) ── */
+  --color-cream: #faf7f2;
+  --color-terracotta: #c4653a;
+  --color-sage: #87a878;
+  --color-charcoal: #2d2d2d;
+  --color-terracotta-light: #d4856a;
+  --color-sage-light: #a7c898;
+
+  /* ── Extended palette (new warm tones) ── */
+  --color-butter: #f5e6c8;
+  --color-paprika: #a3442a;
+  --color-linen: #f0ebe3;
+  --color-warm-white: #fffdf9;
+
+  /* ── Shadows ── */
+  --shadow-soft: 0 2px 8px rgba(45, 45, 45, 0.06);
+  --shadow-warm: 0 4px 16px rgba(196, 101, 58, 0.1);
+  --shadow-lifted: 0 8px 24px rgba(196, 101, 58, 0.15);
+
+  /* ── Typography ── */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ── Spacing scale ── */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  /* ── Border radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    ╔═══════════════════════════════════════════════════════════════╗
+    ║  The <head> is invisible — it tells the browser about        ║
+    ║  our page (title, fonts, stylesheets) but doesn't show up.   ║
+    ╚═══════════════════════════════════════════════════════════════╝
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Our family cookbook — recipes we love, made together">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Google Fonts: Fraunces (display headings) + Source Sans 3 (body text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400,0..100,0..1;0,9..144,600,0..100,0..1;0,9..144,700,0..100,0..1;1,9..144,400,0..100,0..1&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Our stylesheets — loaded in order: tokens → global → components → animations -->
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+
+  <title>Our Cookbook</title>
+</head>
+<body>
+
+  <!--
+    ╔═══════════════════════════════════════════════════════════════╗
+    ║  ✏️  HTML ZONE — This is all real HTML! Every tag does          ║
+    ║  something you can see. Try changing text, adding tags,       ║
+    ║  or rearranging sections.                                     ║
+    ╚═══════════════════════════════════════════════════════════════╝
+  -->
+
+  <!-- HEADER — Sticky navigation bar at the top -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">Our Cookbook</a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO — The big welcome section -->
+    <section class="hero">
+      <h1>Our Cookbook</h1>
+      <p class="tagline">Recipes we love, made together</p>
+    </section>
+
+    <!-- RECIPE GRID — Each card links to a recipe page -->
+    <section class="recipes">
+      <div class="recipe-grid">
+
+        <!--
+          Card 1: Baked Chicken (favorite!)
+          The style="--i: 0" sets the animation delay — card 0 appears first,
+          card 1 appears 0.1s later, etc. This creates the staggered entrance.
+        -->
+        <a href="/recipes/baked-chicken.html" class="card" style="--i: 0">
+          <div class="card-image">
+            <div class="card-placeholder">
+              <span class="icon">+</span>
+              <span class="text">Add photo</span>
+            </div>
+            <span class="favorite-badge" title="Favorite">&#9733;</span>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Baked Chicken</h3>
+            <p class="card-description">Simple oven-baked chicken, flip twice for crispy skin</p>
+            <div class="card-meta">
+              <span class="cook-time">35 min</span>
+              <div class="tags">
+                <span class="tag">chicken</span>
+                <span class="tag">easy</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 2: Beef Stew -->
+        <a href="/recipes/beef-stew.html" class="card" style="--i: 1">
+          <div class="card-image">
+            <div class="card-placeholder">
+              <span class="icon">+</span>
+              <span class="text">Add photo</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Beef Stew + Vegetables</h3>
+            <p class="card-description">Hearty African-inspired beef stew with kale and peanut butter</p>
+            <div class="card-meta">
+              <span class="cook-time">120 min</span>
+              <div class="tags">
+                <span class="tag">beef</span>
+                <span class="tag">stew</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 3: Chocolate Chia Pudding -->
+        <a href="/recipes/choc-chia-pudding.html" class="card" style="--i: 2">
+          <div class="card-image">
+            <div class="card-placeholder">
+              <span class="icon">+</span>
+              <span class="text">Add photo</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Chocolate Chia Pudding</h3>
+            <p class="card-description">5-ingredient overnight chocolate pudding — healthy and easy</p>
+            <div class="card-meta">
+              <span class="cook-time">No cook</span>
+              <div class="tags">
+                <span class="tag">healthy</span>
+                <span class="tag">no-cook</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 4: Protein Pancakes (favorite!) -->
+        <a href="/recipes/protein-pancakes.html" class="card" style="--i: 3">
+          <div class="card-image">
+            <div class="card-placeholder">
+              <span class="icon">+</span>
+              <span class="text">Add photo</span>
+            </div>
+            <span class="favorite-badge" title="Favorite">&#9733;</span>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Protein Pancakes</h3>
+            <p class="card-description">Emily's high-protein pancake mix with cottage cheese and collagen</p>
+            <div class="card-meta">
+              <span class="cook-time">25 min</span>
+              <div class="tags">
+                <span class="tag">protein</span>
+                <span class="tag">breakfast</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

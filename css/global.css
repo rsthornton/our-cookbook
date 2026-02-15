@@ -1,0 +1,82 @@
+/*
+ * Global Styles — Our Cookbook
+ * ============================
+ * Reset, typography, and base layout.
+ * These styles apply to EVERY page.
+ *
+ * The @import below pulls in our design tokens (colors, fonts, spacing).
+ * Then we use those tokens with var(--token-name) syntax.
+ */
+
+@import url('tokens.css');
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+/*
+ * The body background uses an SVG noise texture for a subtle paper feel.
+ * The SVG is inline (data URI) so we don't need an extra file.
+ */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  color: var(--color-charcoal);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Typography ──
+ * Headings use Fraunces, a variable font with 'SOFT' and 'WONK' axes.
+ * SOFT 100 = rounder serifs, WONK 1 = playful asymmetry.
+ */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 100, 'WONK' 1;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-charcoal);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 1.75rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+a {
+  color: var(--color-terracotta);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-terracotta-light);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ── Layout ── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}

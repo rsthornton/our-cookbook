@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/settings.json
+
+# Thumbnails
+Thumbs.db

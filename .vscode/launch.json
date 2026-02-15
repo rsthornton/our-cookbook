@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "python3 -m http.server 4323",
+      "name": "Start cookbook server",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
+}

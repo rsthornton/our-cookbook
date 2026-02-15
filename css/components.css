@@ -1,0 +1,451 @@
+/*
+ * Component Styles — Our Cookbook
+ * ===============================
+ * Styles for reusable pieces: header, cards, tags, recipe pages.
+ * All in one file — easier to see, easier to change.
+ */
+
+/* ═══════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════ */
+
+.header {
+  background-color: var(--color-cream);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: var(--space-md) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 100, 'WONK' 1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-terracotta);
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--color-terracotta-light);
+}
+
+
+/* ═══════════════════════════════════════════
+   HERO SECTION (homepage)
+   ═══════════════════════════════════════════ */
+
+.hero {
+  text-align: center;
+  padding: var(--space-xl) 0 var(--space-lg);
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--color-terracotta);
+  margin-bottom: var(--space-sm);
+}
+
+/* Decorative terracotta bar under the title */
+.hero h1::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--color-terracotta);
+  margin: var(--space-sm) auto 0;
+  border-radius: 2px;
+}
+
+.tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  color: #888;
+  margin-top: var(--space-sm);
+}
+
+
+/* ═══════════════════════════════════════════
+   RECIPE CARD GRID
+   ═══════════════════════════════════════════ */
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
+}
+
+/* Featured card (first card) spans 2 columns on wider screens */
+@media (min-width: 640px) {
+  .recipe-grid .card:first-child {
+    grid-column: span 2;
+  }
+}
+
+
+/* ═══════════════════════════════════════════
+   RECIPE CARD
+   ═══════════════════════════════════════════ */
+
+.card {
+  background: var(--color-warm-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+}
+
+.card:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  box-shadow: var(--shadow-lifted);
+}
+
+/* Alternating card backgrounds for visual rhythm */
+.card:nth-child(even) {
+  background: var(--color-linen);
+}
+
+.card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Image placeholder (when no photo yet) */
+.card-placeholder {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  background: linear-gradient(135deg, var(--color-sage-light) 0%, var(--color-sage) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  color: white;
+  transition: opacity 0.2s ease;
+}
+
+.card:hover .card-placeholder {
+  opacity: 0.9;
+}
+
+.card-placeholder .icon {
+  font-size: 1.5rem;
+  font-weight: 300;
+  width: 40px;
+  height: 40px;
+  border: 2px dashed rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-placeholder .text {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Favorite badge */
+.favorite-badge {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: var(--color-terracotta);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+.card-content {
+  padding: var(--space-md);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-xs);
+}
+
+.card-description {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: var(--space-sm);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.75rem;
+}
+
+.cook-time {
+  color: var(--color-terracotta);
+  font-weight: 600;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.tag {
+  background: var(--color-butter);
+  color: var(--color-charcoal);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+}
+
+
+/* ═══════════════════════════════════════════
+   RECIPE DETAIL PAGE
+   ═══════════════════════════════════════════ */
+
+.recipe {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-lg) 0 var(--space-xl);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: var(--space-md);
+  font-size: 0.875rem;
+  color: var(--color-terracotta);
+}
+
+.recipe-header {
+  margin-bottom: var(--space-lg);
+}
+
+.recipe-header h1 {
+  color: var(--color-charcoal);
+  margin-bottom: var(--space-sm);
+}
+
+.recipe-description {
+  font-size: 1.125rem;
+  color: #666;
+  margin-bottom: var(--space-md);
+}
+
+/* Metadata bar (prep, cook, total, servings) */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  font-size: 0.9rem;
+}
+
+.meta-item {
+  color: #666;
+}
+
+.meta-item.total {
+  color: var(--color-terracotta);
+}
+
+/* Tags on recipe page (sage colored) */
+.recipe-tags .tag {
+  background: var(--color-sage-light);
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Recipe image / placeholder */
+.recipe-image {
+  margin-bottom: var(--space-lg);
+}
+
+.recipe-image img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.recipe-image .placeholder {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-height: 400px;
+  background: linear-gradient(135deg, var(--color-sage-light) 0%, var(--color-sage) 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  color: white;
+}
+
+.recipe-image .placeholder .icon {
+  font-size: 2.5rem;
+  font-weight: 300;
+  width: 60px;
+  height: 60px;
+  border: 2px dashed rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-image .placeholder .text {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Recipe content card */
+.recipe-content {
+  background: var(--color-warm-white);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.recipe-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-terracotta);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.recipe-content h2:first-child {
+  margin-top: 0;
+}
+
+/*
+ * Custom list styling:
+ * - Unordered lists get terracotta dot bullets
+ * - Ordered lists get sage circle step numbers via CSS counters
+ */
+.recipe-content ul {
+  list-style: none;
+  margin-left: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.recipe-content ul li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: var(--space-sm);
+  line-height: 1.7;
+}
+
+/* Terracotta dot bullets */
+.recipe-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+}
+
+.recipe-content ol {
+  list-style: none;
+  counter-reset: step;
+  margin-left: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.recipe-content ol li {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: var(--space-md);
+  line-height: 1.7;
+  counter-increment: step;
+}
+
+/* Sage circle step numbers */
+.recipe-content ol li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--color-sage);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-content p {
+  margin-bottom: var(--space-md);
+}
+
+.recipe-content strong {
+  color: var(--color-paprika);
+}
+
+/* Source attribution */
+.source {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: #888;
+  font-size: 0.875rem;
+}
+
+
+/* ═══════════════════════════════════════════
+   EMPTY STATE
+   ═══════════════════════════════════════════ */
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-xl);
+  background: white;
+  border-radius: var(--radius-lg);
+  color: #666;
+}
