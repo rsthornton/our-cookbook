@@ -41,6 +41,31 @@ This removes friction so Session 1 is pure fun.
 
 ---
 
+## Progress Log
+
+### Session 0.5: "Pre-Session with Shingai" (2026-02-21)
+
+Blended elements of Sessions 1 and 3 while setting up the project together.
+
+**What we covered:**
+- [x] Restructured repo — moved from nested `our-cookbook/` subdirectory to top-level git repo
+- [x] Debugged local dev server (port 4323 was already in use — killed stale process)
+- [x] Toured the file structure (Session 1, Activity 1)
+- [x] Learned the template → recipe page → homepage card pattern (Session 3 core concept)
+- [x] Created `recipes/ultimate-protein-pancakes.html` from `_template.html` (Session 3, Activity 2)
+- [x] Added recipe card to `index.html` with `style="--i: 4"` stagger animation (Session 3, Activity 4)
+- [x] Walked through first commit workflow via VS Code terminal (Session 1, Activity 4)
+
+**Key concepts introduced:**
+- Project file structure: `index.html` (homepage) → `recipes/*.html` (recipe pages) → `css/` (styling)
+- The template pattern: copy `_template.html`, replace `REPLACE:` comments, fill in your content
+- Two-file connection: a card on the homepage `<a href="...">` links to the full recipe page
+- Git basics: `status` → `add` → `commit` → `push`
+
+**Recipe added:** Ultimate Protein Pancakes (111g protein per batch — the evolved version of Emily's original, with whipped egg whites and chia seeds)
+
+---
+
 ## Session 1: "Hello, Browser"
 
 **Goal:** Understand that HTML = structure, see changes live.
@@ -322,7 +347,7 @@ Add a "Print Recipe" button that calls `window.print()`.
 
 2. **Deploy to Netlify** (20 min)
    - Connect GitHub repo
-   - No build command needed — just set publish directory to `our-cookbook/`
+   - No build command needed — publish directory is root `/`
    - Watch it go live
    - Get your URL
 
