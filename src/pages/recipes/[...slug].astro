@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes');
+  return recipes.map(recipe => ({
+    params: { slug: recipe.id },
+    props: { recipe },
+  }));
+}
+
+const { recipe } = Astro.props;
+const { Content } = await render(recipe);
+const totalTime = recipe.data.prepTime + recipe.data.cookTime;
+---
+
+<BaseLayout title={`${recipe.data.title} | Our Cookbook`} description={recipe.data.description}>
+  <Header />
+  <main class="container">
+    <article class="recipe">
+      <a href="/" class="back-link">&larr; All Recipes</a>
+
+      <div class="recipe-header">
+        <h1>{recipe.data.title}</h1>
+        <p class="recipe-description">{recipe.data.description}</p>
+
+        <div class="meta">
+          <span class="meta-item"><strong>Prep:</strong> {recipe.data.prepTime} min</span>
+          <span class="meta-item"><strong>Cook:</strong> {recipe.data.cookTime > 0 ? `${recipe.data.cookTime} min` : 'None'}</span>
+          <span class="meta-item total"><strong>Total:</strong> {totalTime > 0 ? `${totalTime} min` : 'No cook'}</span>
+          <span class="meta-item"><strong>Servings:</strong> {recipe.data.servings}</span>
+        </div>
+
+        <div class="tags recipe-tags">
+          {recipe.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+        </div>
+      </div>
+
+      <div class="recipe-image">
+        {recipe.data.image ? (
+          <img src={recipe.data.image} alt={recipe.data.title} />
+        ) : (
+          <div class="placeholder">
+            <span class="icon">+</span>
+            <span class="text">Add photo</span>
+          </div>
+        )}
+      </div>
+
+      <div class="recipe-content">
+        <Content />
+      </div>
+
+      <div class="source">
+        <em>Source: {recipe.data.source}</em>
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .recipe {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-lg) 0 var(--space-xl);
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: var(--space-md);
+    font-size: 0.875rem;
+    color: var(--color-terracotta);
+  }
+
+  .recipe-header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .recipe-header h1 {
+    color: var(--color-charcoal);
+    margin-bottom: var(--space-sm);
+  }
+
+  .recipe-description {
+    font-size: 1.125rem;
+    color: #666;
+    margin-bottom: var(--space-md);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    font-size: 0.9rem;
+  }
+
+  .meta-item {
+    color: #666;
+  }
+
+  .meta-item.total {
+    color: var(--color-terracotta);
+  }
+
+  .recipe-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .recipe-tags .tag {
+    background: var(--color-sage-light);
+    color: white;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .recipe-image {
+    margin-bottom: var(--space-lg);
+  }
+
+  .recipe-image img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  .recipe-image .placeholder {
+    aspect-ratio: 16/9;
+    width: 100%;
+    max-height: 400px;
+    background: linear-gradient(135deg, var(--color-sage-light) 0%, var(--color-sage) 100%);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    color: white;
+  }
+
+  .recipe-image .placeholder .icon {
+    font-size: 2.5rem;
+    font-weight: 300;
+    width: 60px;
+    height: 60px;
+    border: 2px dashed rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .recipe-image .placeholder .text {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .recipe-content {
+    background: var(--color-warm-white);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .source {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: #888;
+    font-size: 0.875rem;
+  }
+</style>

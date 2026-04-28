@@ -1,0 +1,189 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Colors */
+  --color-cream: #faf7f2;
+  --color-terracotta: #c4653a;
+  --color-sage: #87a878;
+  --color-charcoal: #2d2d2d;
+  --color-terracotta-light: #d4856a;
+  --color-sage-light: #a7c898;
+  --color-butter: #f5e6c8;
+  --color-paprika: #a3442a;
+  --color-linen: #f0ebe3;
+  --color-warm-white: #fffdf9;
+
+  /* Shadows */
+  --shadow-soft: 0 2px 8px rgba(45, 45, 45, 0.06);
+  --shadow-warm: 0 4px 16px rgba(196, 101, 58, 0.1);
+  --shadow-lifted: 0 8px 24px rgba(196, 101, 58, 0.15);
+
+  /* Fonts */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  color: var(--color-charcoal);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 100, 'WONK' 1;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-charcoal);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 1.75rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+a {
+  color: var(--color-terracotta);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-terracotta-light);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Animations */
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Recipe Content Styles */
+.recipe-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-terracotta);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.recipe-content h2:first-child {
+  margin-top: 0;
+}
+
+.recipe-content ul {
+  list-style: none;
+  margin-left: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.recipe-content ul li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: var(--space-sm);
+  line-height: 1.7;
+}
+
+.recipe-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+}
+
+.recipe-content ol {
+  list-style: none;
+  counter-reset: step;
+  margin-left: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.recipe-content ol li {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: var(--space-md);
+  line-height: 1.7;
+  counter-increment: step;
+}
+
+.recipe-content ol li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--color-sage);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-content p {
+  margin-bottom: var(--space-md);
+}
+
+.recipe-content strong {
+  color: var(--color-paprika);
+}

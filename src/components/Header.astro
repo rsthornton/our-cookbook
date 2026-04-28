@@ -1,0 +1,42 @@
+---
+---
+
+<header class="header">
+  <div class="header-container">
+    <a href="/" class="logo">Our Cookbook</a>
+  </div>
+</header>
+
+<style>
+  .header {
+    background-color: var(--color-cream);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: var(--space-md) 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-terracotta);
+    text-decoration: none;
+  }
+
+  .logo:hover {
+    color: var(--color-terracotta-light);
+  }
+</style>

@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import RecipeCard from '../components/RecipeCard.astro';
+import { getCollection } from 'astro:content';
+
+const recipes = await getCollection('recipes');
+// Sort: favorites first, then alphabetical
+recipes.sort((a, b) => {
+  if (a.data.favorite && !b.data.favorite) return -1;
+  if (!a.data.favorite && b.data.favorite) return 1;
+  return a.data.title.localeCompare(b.data.title);
+});
+
+const categories = [...new Set(recipes.map(r => r.data.category))].sort();
+const difficulties = ['easy', 'medium', 'involved'];
+---
+
+<BaseLayout>
+  <Header />
+  <main class="container">
+    <section class="hero">
+      <h1>Our Cookbook</h1>
+      <p class="tagline">Recipes we love, made together</p>
+    </section>
+
+    <!-- Search and Filter -->
+    <section class="filters">
+      <input
+        type="text"
+        id="search"
+        placeholder="Search recipes..."
+        class="search-input"
+      />
+      <div class="filter-pills">
+        <button class="pill active" data-filter="all">All</button>
+        {categories.map(cat => (
+          <button class="pill" data-filter={cat}>{cat}</button>
+        ))}
+      </div>
+    </section>
+
+    <section class="recipes">
+      <div class="recipe-grid">
+        {recipes.map((recipe, i) => (
+          <RecipeCard recipe={recipe} index={i} />
+        ))}
+      </div>
+      <div class="empty-state" id="no-results" style="display: none;">
+        <p>No recipes match your search. Try different keywords!</p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .hero {
+    text-align: center;
+    padding: var(--space-xl) 0 var(--space-lg);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-sm);
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .hero h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--color-terracotta);
+    margin: var(--space-sm) auto 0;
+    border-radius: 2px;
+  }
+
+  .tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    color: #888;
+    margin-top: var(--space-sm);
+    opacity: 0;
+    animation: fadeInUp 0.6s ease 0.15s forwards;
+  }
+
+  .filters {
+    margin-bottom: var(--space-lg);
+  }
+
+  .search-input {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background: var(--color-warm-white);
+    outline: none;
+    margin-bottom: var(--space-md);
+  }
+
+  .search-input:focus {
+    border-color: var(--color-terracotta);
+    box-shadow: 0 0 0 2px rgba(196, 101, 58, 0.1);
+  }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .pill {
+    background: var(--color-butter);
+    color: var(--color-charcoal);
+    border: none;
+    padding: 6px 16px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .pill:hover {
+    background: var(--color-terracotta-light);
+    color: white;
+  }
+
+  .pill.active {
+    background: var(--color-terracotta);
+    color: white;
+  }
+
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
+  }
+
+  @media (min-width: 640px) {
+    .recipe-grid :global(.card:first-child) {
+      grid-column: span 2;
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: var(--space-xl);
+    background: white;
+    border-radius: var(--radius-lg);
+    color: #666;
+  }
+</style>
+
+<script>
+  const searchInput = document.getElementById('search') as HTMLInputElement;
+  const pills = document.querySelectorAll('.pill');
+  const cards = document.querySelectorAll('.card');
+  const noResults = document.getElementById('no-results') as HTMLElement;
+  const grid = document.querySelector('.recipe-grid') as HTMLElement;
+
+  let activeCategory = 'all';
+
+  function filterCards() {
+    const query = searchInput.value.toLowerCase().trim();
+    let visible = 0;
+
+    cards.forEach((card) => {
+      const title = card.querySelector('.card-title')?.textContent?.toLowerCase() || '';
+      const description = card.querySelector('.card-description')?.textContent?.toLowerCase() || '';
+      const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent?.toLowerCase() || '');
+      const category = (card as HTMLElement).dataset.category || '';
+
+      const matchesSearch = !query || title.includes(query) || description.includes(query) || tags.some(t => t.includes(query));
+      const matchesCategory = activeCategory === 'all' || category === activeCategory;
+
+      const show = matchesSearch && matchesCategory;
+      (card as HTMLElement).style.display = show ? '' : 'none';
+      if (show) {
+        (card as HTMLElement).style.setProperty('--i', String(visible));
+        visible++;
+      }
+    });
+
+    noResults.style.display = visible === 0 ? '' : 'none';
+    grid.style.display = visible === 0 ? 'none' : '';
+  }
+
+  searchInput.addEventListener('input', filterCards);
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeCategory = (pill as HTMLElement).dataset.filter || 'all';
+      filterCards();
+    });
+  });
+</script>

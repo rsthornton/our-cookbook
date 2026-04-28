@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout title="Not Found | Our Cookbook">
+  <Header />
+  <main class="container">
+    <div class="not-found">
+      <h1>Recipe Not Found</h1>
+      <p>Looks like this recipe wandered off. Maybe it's still in the oven?</p>
+      <a href="/">← Back to all recipes</a>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  .not-found {
+    text-align: center;
+    padding: var(--space-xl);
+    margin-top: var(--space-xl);
+  }
+
+  .not-found h1 {
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-md);
+  }
+
+  .not-found p {
+    color: #666;
+    margin-bottom: var(--space-lg);
+    font-size: 1.125rem;
+  }
+</style>
