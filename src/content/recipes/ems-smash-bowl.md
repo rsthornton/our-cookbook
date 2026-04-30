@@ -38,8 +38,8 @@ favorite: false
 - 1 clove garlic
 
 ### Yogurt BBQ Sauce
-- Yogurt
-- Barbecue sauce
+- ¼ to ⅓ cup high-protein low-fat Greek yogurt
+- 2-3 tbsp barbecue sauce
 
 ### Fresh Toppings
 - Spinach or lettuce
@@ -65,6 +65,7 @@ favorite: false
 
 ### Cottage Cheese Sauce
 1. Blend cottage cheese, dill, parsley, garlic, salt, pepper, onion powder, and paprika in a blender until smooth
+2. Add a few splashes of water if the blend gets stuck
 
 ### Yogurt BBQ Sauce
 1. Mix yogurt and barbecue sauce together
