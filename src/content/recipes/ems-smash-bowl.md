@@ -6,7 +6,7 @@ cookTime: 45
 servings: 4
 category: "dinner"
 tags: ["beef", "bowl", "mushrooms", "squash"]
-difficulty: "moderate"
+difficulty: "medium"
 source: "Emily (live cook, 2026-04-30)"
 favorite: false
 ---
