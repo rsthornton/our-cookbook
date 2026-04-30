@@ -9,7 +9,7 @@ import Header from '../components/Header.astro';
     <div class="not-found">
       <h1>Recipe Not Found</h1>
       <p>Looks like this recipe wandered off. Maybe it's still in the oven?</p>
-      <a href="/">← Back to all recipes</a>
+      <a href={import.meta.env.BASE_URL}>← Back to all recipes</a>
     </div>
   </main>
 </BaseLayout>
