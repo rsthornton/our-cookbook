@@ -20,7 +20,7 @@ const totalTime = recipe.data.prepTime + recipe.data.cookTime;
   <Header />
   <main class="container">
     <article class="recipe">
-      <a href="/" class="back-link">&larr; All Recipes</a>
+      <a href={import.meta.env.BASE_URL} class="back-link">&larr; All Recipes</a>
 
       <div class="recipe-header">
         <h1>{recipe.data.title}</h1>
