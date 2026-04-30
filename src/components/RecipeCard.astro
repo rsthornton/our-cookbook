@@ -7,7 +7,7 @@ interface Props {
 const { recipe, index } = Astro.props;
 ---
 
-<a href={`${import.meta.env.BASE_URL}recipes/${recipe.id}`} class="card" style={`--i: ${index}`} data-category={recipe.data.category}>
+<a href={`${import.meta.env.BASE_URL}/recipes/${recipe.id}`} class="card" style={`--i: ${index}`} data-category={recipe.data.category}>
   <div class="card-image">
     {recipe.data.image ? (
       <img src={recipe.data.image} alt={recipe.data.title} />
