@@ -9,7 +9,7 @@ const recipes = defineCollection({
     prepTime: z.number(),
     cookTime: z.number(),
     servings: z.number(),
-    category: z.enum(['breakfast', 'lunch', 'dinner', 'dessert', 'snack', 'drink', 'side']),
+    category: z.enum(['breakfast', 'lunch', 'dinner', 'dessert', 'snack', 'drink', 'side', 'sauce']),
     tags: z.array(z.string()),
     difficulty: z.enum(['easy', 'medium', 'involved']),
     source: z.string(),
